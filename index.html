@@ -4,11 +4,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
     <script src="./main.js" defer></script>
     <title>Todo List</title>
   </head>
   <body>
     <div id="content">
+      <dialog id="todo-dialog" class="dialog">
+        <form id="todo-form" method="dialog">
+          <div class="title-bar">
+            <button id="todo-cancel" class="cancel-btn" value="cancel">
+              <span class="material-icons"> cancel </span>
+            </button>
+          </div>
+          <input
+            type="text"
+            name="title"
+            id="title-input"
+            placeholder="title: go out with matty"
+            required
+          />
+          <textarea
+            name="description"
+            id="description-input"
+            cols="30"
+            rows="8"
+            maxlength="500"
+            placeholder="description: take matty out for some cornetto and fun"
+            required
+          ></textarea>
+          <div id="priority-input">
+            <div>
+              <input
+                type="radio"
+                name="priority"
+                id="high"
+                value="high"
+                required
+              />
+              <label for="high">high</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="priority"
+                id="med"
+                value="med"
+                required
+              />
+              <label for="med">med</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="priority"
+                id="low"
+                value="low"
+                required
+              />
+              <label for="low">low</label>
+            </div>
+          </div>
+          <div>
+            <label for="duedate-input">due:</label>
+            <input type="date" id="duedate-input" min="2023-01-01" required />
+          </div>
+          <button id="todo-submit" value="submit">
+            <span class="material-icons"> add_task </span>
+          </button>
+        </form>
+      </dialog>
       <div class="header">
         <h1 class="logo">Todo</h1>
       </div>
@@ -18,8 +86,12 @@
           <li class="menu-item"><div id="upcoming">Upcoming</div></li>
           <li class="menu-item"><div id="all">All</div></li>
         </ul>
+        <button id="new-project-btn" class="material-icons">add</button>
       </div>
-      <div class="main">my todo list</div>
+      <div class="main">
+        My todo list
+        <button id="fab"><span class="material-icons"> add </span></button>
+      </div>
     </div>
   </body>
 </html>
