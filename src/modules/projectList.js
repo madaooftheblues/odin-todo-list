@@ -29,8 +29,7 @@ const projectList = {
     const list = [];
     projectList.projects.forEach((todoList) => {
       todoList.todos.forEach((todo) => {
-        console.log(formatDate(new Date()));
-        if (todo.dueDate === '2023-09-07') list.push(todo);
+        if (todo.dueDate === formatDate(new Date())) list.push(todo);
       });
     });
     return list;
