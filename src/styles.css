@@ -67,7 +67,7 @@ input[type='radio']:checked::before {
 #todo-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 #title-input {
@@ -95,9 +95,9 @@ input[type='radio']:checked::before {
   align-items: center;
   transform: scale(1);
   transition-duration: 1s;
-  position: relative;
-  top: 85%;
-  left: 95%;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
   box-shadow: rgba(26, 18, 11, 0.5) 0px 2px 4px;
 }
 
@@ -138,6 +138,8 @@ input[type='radio']:checked::before {
 
 .main {
   padding: 50px;
+  overflow: hidden;
+  position: relative;
 }
 
 .dialog,
@@ -158,15 +160,17 @@ input[type='radio']:checked::before {
   cursor: pointer;
 }
 
-.menu-item:hover {
+.menu-item:hover,
+.menu-item.selected {
   transform: scale(1.05);
 }
 
-.menu-item:hover > div::before {
+.menu-item:hover > div::before,
+.menu-item.selected > div::before {
   content: '//';
 }
 
-.cancel-btn {
+.btn {
   height: 1.5rem;
   width: 1.5rem;
   color: var(--color);
@@ -184,6 +188,88 @@ input[type='radio']:checked::before {
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px;
   align-items: center;
+}
+
+#new-project-btn {
+  background-color: var(--color);
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#new-project-btn:hover {
+  color: var(--accent);
+}
+
+#new-project-input {
+  font-size: 1.1rem;
+  width: 80%;
+}
+
+.project-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.show {
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+.new-project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.projects {
+  width: 100%;
+}
+
+.project-list,
+.todo-list {
+  list-style-type: none;
+}
+
+#project-list {
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.project-list > li {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.project-list > li:hover {
+  border-radius: 30px;
+  box-shadow: rgba(26, 18, 11, 0.3) 0px 2px 4px;
+}
+
+.title,
+.description {
+  cursor: pointer;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-block {
+  width: 50px;
+  height: 50px;
 }

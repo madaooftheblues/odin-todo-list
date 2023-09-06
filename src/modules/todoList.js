@@ -15,7 +15,3 @@ export function removeTodo(list, todo) {
 export function clearList(list) {
   list.todos.length = 0;
 }
-
-export function printList(list) {
-  console.log(list.todos);
-}

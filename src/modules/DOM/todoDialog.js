@@ -18,12 +18,14 @@ const todoDialog = {
     );
     const dueDateElm = dialogElm.querySelector('#duedate-input');
 
-    const title = titleElm.value;
-    const description = descElm.value;
-    const priority = priorityElm.value;
-    const dueDate = dueDateElm.value;
+    const todo = {
+      title: titleElm.value,
+      description: descElm.value,
+      priority: priorityElm.value,
+      dueDate: dueDateElm.value
+    };
 
-    return [title, description, dueDate, priority];
+    return todo;
   }
 };
 
