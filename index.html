@@ -16,7 +16,7 @@
       <dialog id="todo-dialog" class="dialog">
         <form id="todo-form" method="dialog">
           <div class="title-bar">
-            <button id="todo-cancel" class="cancel-btn" value="cancel">
+            <button id="todo-cancel" class="btn" value="cancel">
               <span class="material-icons"> cancel </span>
             </button>
           </div>
@@ -82,14 +82,33 @@
       </div>
       <div class="sidebar">
         <ul class="menu">
+          <li class="menu-item selected"><div id="home">Home</div></li>
           <li class="menu-item"><div id="today">Today</div></li>
           <li class="menu-item"><div id="upcoming">Upcoming</div></li>
           <li class="menu-item"><div id="all">All</div></li>
         </ul>
-        <button id="new-project-btn" class="material-icons">add</button>
+        <div class="projects">
+          <h3 class="segment-heading">Projects</h3>
+          <div id="project-list"></div>
+        </div>
+        <div class="new-project">
+          <div class="project-input-container">
+            <input
+              type="text"
+              id="new-project-input"
+              maxlength="20"
+              placeholder="new project..."
+            />
+            <button class="material-icons btn" id="submit-project">done</button>
+            <button class="material-icons btn" id="cancel-project">
+              cancel
+            </button>
+          </div>
+          <button id="new-project-btn" class="material-icons">add</button>
+        </div>
       </div>
       <div class="main">
-        My todo list
+        <div id="current-list"></div>
         <button id="fab"><span class="material-icons"> add </span></button>
       </div>
     </div>
