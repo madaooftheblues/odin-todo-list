@@ -7,6 +7,8 @@ import newProject from './modules/DOM/newProject';
 import Project from './modules/DOM/Project';
 import { createTodo } from './modules/todo';
 import { addTodo } from './modules/todoList';
+import show from './modules/DOM/Menu';
+import populateProjects from './modules/populateProjects';
 
 const fab = document.getElementById('fab');
 
@@ -21,7 +23,6 @@ function handleTodoSubmit() {
     input.priority
   );
   pubsub.publish('todoAdded', todo);
-  pubsub.publish('projectUpdated');
 }
 
 todoDialog.onSubmit(handleTodoSubmit);
@@ -31,7 +32,18 @@ pubsub.subscribe('projectListUpdated', renderProjectList);
 pubsub.subscribe('projectSelected', renderProject);
 pubsub.subscribe('projectSelected', projectList.setCurrentProject);
 pubsub.subscribe('todoAdded', linkTodo);
+pubsub.subscribe('itemSelected', (item) => {
+  switch (item) {
+    case 'today':
+      console.log(projectList.getTodayTodos());
+      break;
+    case 'upcoming':
+      break;
+  }
+});
 
+show();
+populateProjects();
 newProject.bindEvents();
 
 function renderProjectList(list) {

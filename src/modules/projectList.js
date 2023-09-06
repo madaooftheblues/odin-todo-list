@@ -23,6 +23,16 @@ const projectList = {
   },
   projectExists(project) {
     return projectList.projects.some((x) => x.title === project.title);
+  },
+  getTodayTodos() {
+    const list = [];
+    projectList.projects.forEach((todoList) => {
+      todoList.todos.forEach((todo) => {
+        console.log(new Date().getDate());
+        if (todo.dueDate === '2023-09-07') list.push(todo);
+      });
+    });
+    return list;
   }
 };
 
