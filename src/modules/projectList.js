@@ -1,4 +1,5 @@
 import pubsub from './pubsub';
+import { formatDate } from './Helper/helper';
 
 const projectList = {
   projects: [],
@@ -28,7 +29,7 @@ const projectList = {
     const list = [];
     projectList.projects.forEach((todoList) => {
       todoList.todos.forEach((todo) => {
-        console.log(new Date().getDate());
+        console.log(formatDate(new Date()));
         if (todo.dueDate === '2023-09-07') list.push(todo);
       });
     });
