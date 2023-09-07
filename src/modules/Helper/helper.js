@@ -1,7 +1,14 @@
-export function formatDate(dateObj) {
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const year = dateObj.getFullYear();
-
-  return `${year}-${month}-${day}`;
-}
+export const date = {
+  formatDate(dateObj) {
+    return dateObj.toISOString().slice(0, 10);
+  },
+  currentDate() {
+    const current = new Date();
+    return date.formatDate(current);
+  },
+  nextWeek() {
+    const current = new Date();
+    current.setDate(current.getDate() + 7);
+    return date.formatDate(current);
+  }
+};

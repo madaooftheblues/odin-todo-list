@@ -1,5 +1,5 @@
 import pubsub from './pubsub';
-import { formatDate } from './Helper/helper';
+import { date } from './Helper/helper';
 
 const projectList = {
   projects: [],
@@ -29,7 +29,7 @@ const projectList = {
     const list = [];
     projectList.projects.forEach((todoList) => {
       todoList.todos.forEach((todo) => {
-        if (todo.dueDate === formatDate(new Date())) list.push(todo);
+        if (todo.dueDate === date.currentDate()) list.push(todo);
       });
     });
     return list;
