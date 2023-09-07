@@ -4,16 +4,23 @@ import { createTodo } from './todo';
 import { date } from './Helper/helper';
 const populateProjects = () => {
   const workout = createTodoList('workout');
-  const bench = createTodo('benchpress', '', date.currentDate(), 'high');
+  const bench = createTodo('benchpress', '', date.nextWeek(), 'high');
   const backflip = createTodoList('learn backflip');
-  const roll = createTodo(
+  const rollB = createTodo(
     'learn to roll backwards on ground',
-    '',
-    date.nextWeek(),
+    'perform 15 reps',
+    date.currentDate(),
+    'high'
+  );
+  const rollF = createTodo(
+    'learn to roll forward on ground',
+    'perform 15 reps',
+    date.currentDate(),
     'high'
   );
   addTodo(workout, bench);
-  addTodo(backflip, roll);
+  addTodo(backflip, rollB);
+  addTodo(backflip, rollF);
   projectList.addProject(workout);
   projectList.addProject(backflip);
 };

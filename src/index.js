@@ -9,6 +9,7 @@ import { createTodo } from './modules/todo';
 import { addTodo } from './modules/todoList';
 import show from './modules/DOM/Menu';
 import populateProjects from './modules/populateProjects';
+import Todo from './modules/DOM/Todo';
 
 const fab = document.getElementById('fab');
 
@@ -35,9 +36,10 @@ pubsub.subscribe('todoAdded', linkTodo);
 pubsub.subscribe('itemSelected', (item) => {
   switch (item) {
     case 'today':
-      console.log(projectList.getTodayTodos());
+      renderList(projectList.getTodayTodos());
       break;
     case 'upcoming':
+      renderList(projectList.getUpcomingTodos());
       break;
   }
 });
@@ -63,6 +65,15 @@ function renderProject(proj) {
   const projectElm = Project(proj.title, proj.todos);
   mainElm.textContent = '';
   mainElm.appendChild(projectElm);
+}
+
+function renderList(list) {
+  const mainElm = document.getElementById('current-list');
+  const todosElm = list.map((todo) => Todo(todo));
+  mainElm.textContent = '';
+  todosElm.forEach((elm) => {
+    mainElm.appendChild(elm);
+  });
 }
 
 function linkTodo(todo) {

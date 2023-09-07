@@ -33,6 +33,17 @@ const projectList = {
       });
     });
     return list;
+  },
+  getUpcomingTodos() {
+    const list = [];
+    projectList.projects.forEach((todoList) => {
+      todoList.todos.forEach((todo) => {
+        const currentDate = new Date();
+        const todoDate = new Date(todo.dueDate);
+        if (todoDate > currentDate) list.push(todo);
+      });
+    });
+    return list;
   }
 };
 
