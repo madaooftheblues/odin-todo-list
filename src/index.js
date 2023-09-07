@@ -5,11 +5,11 @@ import projectList from './modules/projectList';
 import ProjectList from './modules/DOM/ProjectList';
 import newProject from './modules/DOM/newProject';
 import Project from './modules/DOM/Project';
-import { createTodo } from './modules/todo';
+import { createTodo, toggleStatus } from './modules/todo';
 import { addTodo } from './modules/todoList';
-import show from './modules/DOM/Menu';
 import populateProjects from './modules/populateProjects';
 import Todo from './modules/DOM/Todo';
+import menu from './modules/DOM/menu';
 
 const fab = document.getElementById('fab');
 
@@ -33,7 +33,15 @@ pubsub.subscribe('projectListUpdated', renderProjectList);
 pubsub.subscribe('projectSelected', renderProject);
 pubsub.subscribe('projectSelected', projectList.setCurrentProject);
 pubsub.subscribe('todoAdded', linkTodo);
-pubsub.subscribe('itemSelected', (item) => {
+pubsub.subscribe('itemSelected', renderItem);
+pubsub.subscribe('todoTitleClicked', toggleStatus);
+
+populateProjects();
+menu.bindEvents();
+newProject.bindEvents();
+
+function renderItem(item) {
+  fab.style = 'display:none';
   switch (item) {
     case 'today':
       renderList(projectList.getTodayTodos());
@@ -42,11 +50,7 @@ pubsub.subscribe('itemSelected', (item) => {
       renderList(projectList.getUpcomingTodos());
       break;
   }
-});
-
-show();
-populateProjects();
-newProject.bindEvents();
+}
 
 function renderProjectList(list) {
   const projectsElm = document.getElementById('project-list');
@@ -65,6 +69,7 @@ function renderProject(proj) {
   const projectElm = Project(proj.title, proj.todos);
   mainElm.textContent = '';
   mainElm.appendChild(projectElm);
+  fab.style = 'display:flex';
 }
 
 function renderList(list) {

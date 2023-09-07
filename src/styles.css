@@ -232,13 +232,46 @@ input[type='radio']:checked::before {
   gap: 30px;
 }
 
-.projects {
+.projects,
+.todo-content {
   width: 100%;
+}
+
+.project > .title {
+  text-align: center;
 }
 
 .project-list,
 .todo-list {
   list-style-type: none;
+}
+
+.todo {
+  margin: 20px 0;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  display: flex;
+  gap: 10px;
+}
+
+.todo-content {
+  padding: 5px;
+}
+
+.prio-box {
+  width: 5px;
+  display: inline-block;
+}
+
+.prio-box.high {
+  background-color: red;
+}
+
+.prio-box.mid {
+  background-color: orange;
+}
+
+.prio-box.low {
+  background-color: aqua;
 }
 
 #project-list {
@@ -272,4 +305,9 @@ input[type='radio']:checked::before {
 .p-block {
   width: 50px;
   height: 50px;
+}
+
+.completed {
+  opacity: 50%;
+  text-decoration: line-through;
 }
