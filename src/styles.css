@@ -113,6 +113,20 @@ input[type='date']:hover {
   justify-content: space-evenly;
 }
 
+#todo-submit {
+  background-color: var(--color);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+#todo-submit > * {
+  color: var(--back);
+}
+
+#todo-submit:hover > * {
+  color: var(--accent);
+}
+
 #fab {
   background-color: var(--accent);
   border-radius: 50%;
@@ -326,6 +340,7 @@ input[type='date']:hover {
 .project-list > li:hover {
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  color: var(--accent);
 }
 
 .title,
