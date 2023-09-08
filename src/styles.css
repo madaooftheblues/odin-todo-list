@@ -138,7 +138,6 @@ input[type='radio']:checked::before {
 
 .main {
   padding: 50px;
-  overflow: hidden;
   position: relative;
 }
 
@@ -272,6 +271,11 @@ input[type='radio']:checked::before {
 
 .prio-box.low {
   background-color: aqua;
+}
+
+.todo-list {
+  overflow-y: scroll;
+  height: 400px;
 }
 
 #project-list {
