@@ -26,6 +26,7 @@ function handleTodoSubmit() {
     input.dueDate,
     input.priority
   );
+  todoDialog.clearInput();
   pubsub.publish('todoAdded', todo);
 }
 
@@ -45,8 +46,8 @@ pubsub.subscribe('itemSelected', renderItem);
 pubsub.subscribe('todoTitleClicked', toggleStatus);
 pubsub.subscribe('todoRemoveClicked', (todo) => {
   removeTodo(todo.parent, todo);
-  if (render.isProject) return render.project(render.current);
-  return renderItem(render.current);
+  if (render.isProject) render.project(render.current);
+  else renderItem(menu.getSelectedId());
 });
 
 populateProjects();
@@ -65,18 +66,13 @@ function renderItem(item) {
       break;
     case 'today':
       render.current = createTodoList('today');
-      render.current.todos = home.todos
-        .filter((todo) => date.isToday(todo.dueDate))
-        .concat(projectList.getTodayTodos());
+      render.current.todos = getTodayAll();
       render.list(render.current.todos);
       break;
     case 'upcoming':
       render.current = createTodoList('upcoming');
-      render.list(
-        home.todos
-          .filter((todo) => date.isUpcoming(todo.dueDate))
-          .concat(projectList.getUpcomingTodos())
-      );
+      render.current.todos = getUpcomingAll();
+      render.list(render.current.todos);
       break;
   }
 }
@@ -98,4 +94,16 @@ function linkTodo(todo) {
   addTodo(list, todo);
   if (render.isProject) render.project(list);
   else render.list(list.todos);
+}
+
+function getTodayAll() {
+  return home.todos
+    .filter((todo) => date.isToday(todo.dueDate))
+    .concat(projectList.getTodayTodos());
+}
+
+function getUpcomingAll() {
+  return home.todos
+    .filter((todo) => date.isUpcoming(todo.dueDate))
+    .concat(projectList.getUpcomingTodos());
 }

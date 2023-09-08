@@ -13,6 +13,9 @@ const menu = {
       pubsub.publish('itemSelected', item.querySelector('div').id);
       item.classList.add('selected');
     });
+  },
+  getSelectedId() {
+    return menu.selected.querySelector('div').id;
   }
 };
 
