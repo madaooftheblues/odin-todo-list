@@ -69,8 +69,23 @@ input[type='radio']::before {
   box-shadow: inset 1em 1em var(--accent);
 }
 
-input[type='radio']:checked::before {
+input[type='radio']:checked::before,
+input[type='radio']:hover {
   transform: scale(1);
+}
+
+input[type='date'] {
+  border: 2px solid var(--accent);
+  padding: 6px;
+  margin: 6px;
+  border-radius: 6px;
+  transform: scale(1);
+  transition: transform 1s ease;
+}
+
+input[type='date']:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
 }
 
 #todo-dialog {
@@ -86,7 +101,6 @@ input[type='radio']:checked::before {
 
 #title-input {
   font-size: 1.3rem;
-  height: 1.4;
 }
 
 #description-input {
@@ -171,16 +185,19 @@ input[type='radio']:checked::before {
 .menu-item {
   font-size: 1.2rem;
   cursor: pointer;
+  padding: 6px;
 }
 
 .menu-item:hover,
 .menu-item.selected {
   transform: scale(1.05);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-radius: 6px;
 }
 
-.menu-item:hover > div::before,
-.menu-item.selected > div::before {
-  content: '//';
+.menu-item:hover > div,
+.menu-item.selected > div {
+  color: var(--accent);
 }
 
 .btn {
@@ -290,6 +307,7 @@ input[type='radio']:checked::before {
 .todo-list {
   overflow-y: auto;
   height: 400px;
+  padding-right: 10px;
 }
 
 #project-list {
@@ -306,13 +324,18 @@ input[type='radio']:checked::before {
 }
 
 .project-list > li:hover {
-  border-radius: 30px;
-  box-shadow: rgba(26, 18, 11, 0.3) 0px 2px 4px;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .title,
 .description {
   cursor: pointer;
+}
+
+.description {
+  width: 80%;
+  word-wrap: break-word;
 }
 
 .todo-header {

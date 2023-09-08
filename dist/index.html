@@ -25,6 +25,7 @@
             name="title"
             id="title-input"
             placeholder="title: go out with matty"
+            maxlength="50"
             required
             autofocus
           />
@@ -32,8 +33,8 @@
             name="description"
             id="description-input"
             cols="30"
-            rows="8"
-            maxlength="500"
+            rows="4"
+            maxlength="200"
             placeholder="description: take matty out for some cornetto and fun"
           ></textarea>
           <div id="priority-input">
@@ -69,7 +70,7 @@
             </div>
           </div>
           <div>
-            <label for="duedate-input">due:</label>
+            <label for="duedate-input">due date: </label>
             <input type="date" id="duedate-input" min="2023-01-01" required />
           </div>
           <button id="todo-submit" value="submit">

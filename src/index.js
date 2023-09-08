@@ -40,6 +40,7 @@ pubsub.subscribe('projectSelected', (proj) => {
   render.isProject = true;
   render.current = proj;
   fab.style = 'display:flex';
+  menu.removeSelected();
 });
 pubsub.subscribe('todoAdded', linkTodo);
 pubsub.subscribe('itemSelected', renderItem);

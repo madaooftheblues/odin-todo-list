@@ -16,6 +16,9 @@ const menu = {
   },
   getSelectedId() {
     return menu.selected.querySelector('div').id;
+  },
+  removeSelected() {
+    menu.selected.classList.remove('selected');
   }
 };
 
