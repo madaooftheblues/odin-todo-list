@@ -9,6 +9,20 @@
   opacity: 0.3;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--back);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -274,13 +288,13 @@ input[type='radio']:checked::before {
 }
 
 .todo-list {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 400px;
 }
 
 #project-list {
   height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .project-list > li {
