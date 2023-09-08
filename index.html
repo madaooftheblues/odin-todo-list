@@ -16,7 +16,7 @@
       <dialog id="todo-dialog" class="dialog">
         <form id="todo-form" method="dialog">
           <div class="title-bar">
-            <button id="todo-cancel" class="btn" value="cancel">
+            <button type="button" id="todo-cancel" class="btn" value="cancel">
               <span class="material-icons"> cancel </span>
             </button>
           </div>
@@ -26,6 +26,7 @@
             id="title-input"
             placeholder="title: go out with matty"
             required
+            autofocus
           />
           <textarea
             name="description"
@@ -34,7 +35,6 @@
             rows="8"
             maxlength="500"
             placeholder="description: take matty out for some cornetto and fun"
-            required
           ></textarea>
           <div id="priority-input">
             <div>
