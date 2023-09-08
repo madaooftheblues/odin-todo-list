@@ -1,15 +1,14 @@
 import pubsub from './modules/pubsub';
 import './styles.css';
+import render from './modules/render';
 import todoDialog from './modules/DOM/todoDialog';
 import projectList from './modules/projectList';
 import ProjectList from './modules/DOM/ProjectList';
 import newProject from './modules/DOM/newProject';
-import Project from './modules/DOM/Project';
 import { createTodo, toggleStatus } from './modules/todo';
-import { addTodo } from './modules/todoList';
+import { addTodo, removeTodo } from './modules/todoList';
 import populateProjects from './modules/populateProjects';
-import Todo from './modules/DOM/Todo';
-import menu from './modules/DOM/menu';
+import menu from './modules/menu';
 
 const fab = document.getElementById('fab');
 
@@ -30,11 +29,24 @@ todoDialog.onSubmit(handleTodoSubmit);
 
 pubsub.subscribe('projectAdded', projectList.addProject);
 pubsub.subscribe('projectListUpdated', renderProjectList);
-pubsub.subscribe('projectSelected', renderProject);
+pubsub.subscribe('projectSelected', render.project);
 pubsub.subscribe('projectSelected', projectList.setCurrentProject);
+pubsub.subscribe('projectSelected', (proj) => {
+  render.isProject = true;
+  render.current = proj;
+});
 pubsub.subscribe('todoAdded', linkTodo);
 pubsub.subscribe('itemSelected', renderItem);
+pubsub.subscribe('itemSelected', (list) => {
+  render.isProject = false;
+  render.current = list;
+});
 pubsub.subscribe('todoTitleClicked', toggleStatus);
+pubsub.subscribe('todoRemoveClicked', (todo) => {
+  removeTodo(todo.parent, todo);
+  if (render.isProject) return render.project(render.current);
+  return renderItem(render.current);
+});
 
 populateProjects();
 menu.bindEvents();
@@ -44,10 +56,10 @@ function renderItem(item) {
   fab.style = 'display:none';
   switch (item) {
     case 'today':
-      renderList(projectList.getTodayTodos());
+      render.list(projectList.getTodayTodos());
       break;
     case 'upcoming':
-      renderList(projectList.getUpcomingTodos());
+      render.list(projectList.getUpcomingTodos());
       break;
   }
 }
@@ -64,25 +76,8 @@ function renderProjectList(list) {
   projectsElm.appendChild(projectListElm);
 }
 
-function renderProject(proj) {
-  const mainElm = document.getElementById('current-list');
-  const projectElm = Project(proj.title, proj.todos);
-  mainElm.textContent = '';
-  mainElm.appendChild(projectElm);
-  fab.style = 'display:flex';
-}
-
-function renderList(list) {
-  const mainElm = document.getElementById('current-list');
-  const todosElm = list.map((todo) => Todo(todo));
-  mainElm.textContent = '';
-  todosElm.forEach((elm) => {
-    mainElm.appendChild(elm);
-  });
-}
-
 function linkTodo(todo) {
   const list = projectList.currentProject;
   addTodo(list, todo);
-  renderProject(projectList.currentProject);
+  render.project(projectList.currentProject);
 }

@@ -3,9 +3,10 @@ export function createTodo(
   description,
   dueDate,
   priority,
-  status = false
+  status = false,
+  parent = null
 ) {
-  return { title, description, dueDate, priority, status };
+  return { title, description, dueDate, priority, status, parent };
 }
 
 export function toggleStatus(todo) {
@@ -22,4 +23,8 @@ export function setDescription(todo, des) {
 
 export function setDueDate(todo, date) {
   todo.dueDate = date;
+}
+
+export function setParent(todo, parent) {
+  todo.parent = parent;
 }

@@ -1,4 +1,4 @@
-import pubsub from '../pubsub';
+import pubsub from './pubsub';
 const menuElm = document.querySelector('.menu');
 
 const menu = {

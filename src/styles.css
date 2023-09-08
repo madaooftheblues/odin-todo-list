@@ -311,3 +311,12 @@ input[type='radio']:checked::before {
   opacity: 50%;
   text-decoration: line-through;
 }
+
+.todo-remove {
+  background-color: var(--accent);
+  color: var(--back);
+  display: inline-block;
+  margin-left: 20px;
+  padding: 5px;
+  text-align: center;
+}

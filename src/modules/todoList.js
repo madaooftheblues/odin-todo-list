@@ -4,6 +4,7 @@ export function createTodoList(title = 'untitled') {
 }
 
 export function addTodo(list, todo) {
+  todo.parent = list;
   list.todos.push(todo);
 }
 
