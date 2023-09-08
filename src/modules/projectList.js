@@ -29,7 +29,7 @@ const projectList = {
     const list = [];
     projectList.projects.forEach((todoList) => {
       todoList.todos.forEach((todo) => {
-        if (todo.dueDate === date.currentDate()) list.push(todo);
+        date.isToday(todo.dueDate) && list.push(todo);
       });
     });
     return list;
@@ -38,9 +38,7 @@ const projectList = {
     const list = [];
     projectList.projects.forEach((todoList) => {
       todoList.todos.forEach((todo) => {
-        const currentDate = new Date();
-        const todoDate = new Date(todo.dueDate);
-        if (todoDate > currentDate) list.push(todo);
+        date.isUpcoming(todo.dueDate) && list.push(todo);
       });
     });
     return list;

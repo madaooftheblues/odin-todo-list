@@ -1,15 +1,19 @@
 import pubsub from './modules/pubsub';
 import './styles.css';
 import render from './modules/render';
+import { date } from './modules/Helper/helper';
 import todoDialog from './modules/DOM/todoDialog';
 import projectList from './modules/projectList';
 import ProjectList from './modules/DOM/ProjectList';
 import newProject from './modules/DOM/newProject';
 import { createTodo, toggleStatus } from './modules/todo';
-import { addTodo, removeTodo } from './modules/todoList';
+import { addTodo, createTodoList, removeTodo } from './modules/todoList';
 import populateProjects from './modules/populateProjects';
 import menu from './modules/menu';
+import home from './modules/home';
 
+render.current = home;
+render.list(render.current.todos);
 const fab = document.getElementById('fab');
 
 fab.addEventListener('click', todoDialog.show);
@@ -34,13 +38,10 @@ pubsub.subscribe('projectSelected', projectList.setCurrentProject);
 pubsub.subscribe('projectSelected', (proj) => {
   render.isProject = true;
   render.current = proj;
+  fab.style = 'display:flex';
 });
 pubsub.subscribe('todoAdded', linkTodo);
 pubsub.subscribe('itemSelected', renderItem);
-pubsub.subscribe('itemSelected', (list) => {
-  render.isProject = false;
-  render.current = list;
-});
 pubsub.subscribe('todoTitleClicked', toggleStatus);
 pubsub.subscribe('todoRemoveClicked', (todo) => {
   removeTodo(todo.parent, todo);
@@ -54,12 +55,28 @@ newProject.bindEvents();
 
 function renderItem(item) {
   fab.style = 'display:none';
+  render.isProject = false;
+
   switch (item) {
+    case 'home':
+      fab.style = 'display:flex';
+      render.current = home;
+      render.list(home.todos);
+      break;
     case 'today':
-      render.list(projectList.getTodayTodos());
+      render.current = createTodoList('today');
+      render.current.todos = home.todos
+        .filter((todo) => date.isToday(todo.dueDate))
+        .concat(projectList.getTodayTodos());
+      render.list(render.current.todos);
       break;
     case 'upcoming':
-      render.list(projectList.getUpcomingTodos());
+      render.current = createTodoList('upcoming');
+      render.list(
+        home.todos
+          .filter((todo) => date.isUpcoming(todo.dueDate))
+          .concat(projectList.getUpcomingTodos())
+      );
       break;
   }
 }
@@ -77,7 +94,8 @@ function renderProjectList(list) {
 }
 
 function linkTodo(todo) {
-  const list = projectList.currentProject;
+  const list = render.current;
   addTodo(list, todo);
-  render.project(projectList.currentProject);
+  if (render.isProject) render.project(list);
+  else render.list(list.todos);
 }
