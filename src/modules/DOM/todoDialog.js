@@ -26,6 +26,14 @@ const todoDialog = {
     };
     return todo;
   },
+  populateInput(todo) {
+    const titleElm = dialogElm.querySelector('#title-input');
+    const descElm = dialogElm.querySelector('#description-input');
+    const dueDateElm = dialogElm.querySelector('#duedate-input');
+    titleElm.value = todo.title;
+    descElm.value = todo.description;
+    dueDateElm.value = todo.dueDate;
+  },
   clearInput() {
     const titleElm = dialogElm.querySelector('#title-input');
     const descElm = dialogElm.querySelector('#description-input');

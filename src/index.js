@@ -1,7 +1,7 @@
 import pubsub from './modules/pubsub';
 import './styles.css';
 import render from './modules/render';
-import { date } from './modules/Helper/helper';
+import { copySimilarFields, date } from './modules/Helper/helper';
 import todoDialog from './modules/DOM/todoDialog';
 import projectList from './modules/projectList';
 import ProjectList from './modules/DOM/ProjectList';
@@ -16,16 +16,36 @@ render.current = home;
 render.list(render.current.todos);
 const fab = document.getElementById('fab');
 
-fab.addEventListener('click', todoDialog.show);
+const todoStore = {
+  todo: null,
+  edit: false,
+  storeForEdit(givenTodo) {
+    todoStore.todo = givenTodo;
+    todoStore.edit = true;
+  }
+};
+
+fab.addEventListener('click', () => {
+  todoDialog.show();
+});
 
 function handleTodoSubmit() {
   const input = todoDialog.getInput();
+  if (todoStore.edit) {
+    copySimilarFields(input, todoStore.todo);
+    console.log(todoStore.todo);
+    const list = render.current;
+    if (render.isProject) render.project(list);
+    else render.list(list.todos);
+    return;
+  }
   const todo = createTodo(
     input.title,
     input.description,
     input.dueDate,
     input.priority
   );
+
   todoDialog.clearInput();
   pubsub.publish('todoAdded', todo);
 }
@@ -45,6 +65,11 @@ pubsub.subscribe('projectSelected', (proj) => {
 pubsub.subscribe('todoAdded', linkTodo);
 pubsub.subscribe('itemSelected', renderItem);
 pubsub.subscribe('todoTitleClicked', toggleStatus);
+pubsub.subscribe('todoEditClicked', (todo) => {
+  todoStore.storeForEdit(todo);
+  todoDialog.populateInput(todo);
+  todoDialog.show();
+});
 pubsub.subscribe('todoRemoveClicked', (todo) => {
   removeTodo(todo.parent, todo);
   if (render.isProject) render.project(render.current);

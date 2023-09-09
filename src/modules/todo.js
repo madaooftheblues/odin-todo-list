@@ -1,3 +1,5 @@
+import { generateUniqueId } from './Helper/helper';
+
 export function createTodo(
   title,
   description,
@@ -6,7 +8,8 @@ export function createTodo(
   status = false,
   parent = null
 ) {
-  return { title, description, dueDate, priority, status, parent };
+  const id = generateUniqueId();
+  return { id, title, description, dueDate, priority, status, parent };
 }
 
 export function toggleStatus(todo) {

@@ -358,6 +358,12 @@ input[type='date']:hover {
   justify-content: space-between;
 }
 
+.todo-header-right {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
 .p-block {
   width: 50px;
   height: 50px;
@@ -372,7 +378,18 @@ input[type='date']:hover {
   background-color: var(--accent);
   color: var(--back);
   display: inline-block;
-  margin-left: 20px;
   padding: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+}
+
+.todo-edit {
+  background-color: var(--accent);
+  color: var(--back);
+  display: inline-block;
+  padding: 5px;
+  width: 2rem;
+  height: 1.5rem;
   text-align: center;
 }

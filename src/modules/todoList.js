@@ -8,8 +8,13 @@ export function addTodo(list, todo) {
   list.todos.push(todo);
 }
 
+export function editTodo(list, todo) {
+  const index = list.todos.findIndex((x) => x.id === todo.id);
+  if (index !== -1) list.todos[index] = todo;
+}
+
 export function removeTodo(list, todo) {
-  const index = list.todos.findIndex((x) => x.title === todo.title);
+  const index = list.todos.findIndex((x) => x.id === todo.id);
   if (index !== -1) list.todos.splice(index, 1);
 }
 

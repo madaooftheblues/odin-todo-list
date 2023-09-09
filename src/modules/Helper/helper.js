@@ -20,3 +20,18 @@ export const date = {
     return given > current;
   }
 };
+
+export function generateUniqueId() {
+  const timestamp = new Date().getTime();
+  const random = Math.random().toString(36).substring(2, 10);
+
+  return `${timestamp}${random}`;
+}
+
+export function copySimilarFields(source, target) {
+  for (const key in source) {
+    if (key in target) {
+      target[key] = source[key];
+    }
+  }
+}

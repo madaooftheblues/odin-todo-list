@@ -28,6 +28,10 @@ const Todo = (todo) => {
   dueDateElm.classList.add('due-date');
   dueDateElm.innerText = dueDate;
 
+  const editElm = document.createElement('button');
+  editElm.classList.add('todo-edit');
+  editElm.innerText = 'edit';
+
   const removeElm = document.createElement('button');
   removeElm.classList.add('todo-remove');
   removeElm.innerText = 'X';
@@ -35,10 +39,14 @@ const Todo = (todo) => {
   const headerElm = document.createElement('div');
   headerElm.classList.add('todo-header');
 
-  headerRightElm.append(dueDateElm, removeElm);
+  headerRightElm.append(dueDateElm, editElm, removeElm);
   headerElm.append(titleElm, headerRightElm);
   todoContent.append(headerElm, descriptionElm);
   todoElm.append(priorityELm, todoContent);
+
+  editElm.onclick = () => {
+    pubsub.publish('todoEditClicked', todo);
+  };
 
   removeElm.onclick = () => {
     pubsub.publish('todoRemoveClicked', todo);
