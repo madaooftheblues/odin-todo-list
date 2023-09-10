@@ -26,6 +26,7 @@ const todoStore = {
 };
 
 fab.addEventListener('click', () => {
+  todoStore.edit = false;
   todoDialog.show();
 });
 
@@ -33,7 +34,6 @@ function handleTodoSubmit() {
   const input = todoDialog.getInput();
   if (todoStore.edit) {
     copySimilarFields(input, todoStore.todo);
-    console.log(todoStore.todo);
     const list = render.current;
     if (render.isProject) render.project(list);
     else render.list(list.todos);

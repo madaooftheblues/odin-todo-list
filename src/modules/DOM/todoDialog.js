@@ -6,7 +6,7 @@ const todoDialog = {
     dialogElm.showModal();
   },
   onSubmit(handleSubmit) {
-    dialogElm.addEventListener('close', handleSubmit);
+    dialogElm.addEventListener('submit', handleSubmit);
   },
   close() {
     dialogElm.close();
@@ -18,6 +18,7 @@ const todoDialog = {
       'input[name="priority"]:checked'
     );
     const dueDateElm = dialogElm.querySelector('#duedate-input');
+
     const todo = {
       title: titleElm.value,
       description: descElm.value,
@@ -30,9 +31,14 @@ const todoDialog = {
     const titleElm = dialogElm.querySelector('#title-input');
     const descElm = dialogElm.querySelector('#description-input');
     const dueDateElm = dialogElm.querySelector('#duedate-input');
+    const priorityElm = document.querySelectorAll('input[name="priority"]');
+
     titleElm.value = todo.title;
     descElm.value = todo.description;
     dueDateElm.value = todo.dueDate;
+    priorityElm.forEach((pElm) => {
+      if (pElm.value === todo.priority) pElm.checked = true;
+    });
   },
   clearInput() {
     const titleElm = dialogElm.querySelector('#title-input');
@@ -45,13 +51,12 @@ const todoDialog = {
     inputElms.forEach((elm) => {
       elm.value = '';
     });
-    priorityElm.checked = false;
+    priorityElm.value = false;
   }
 };
 
 closeButtonElement.addEventListener('click', () => {
   todoDialog.close();
-  todoDialog.clearInput();
 });
 
 export default todoDialog;
