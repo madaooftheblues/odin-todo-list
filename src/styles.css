@@ -374,6 +374,11 @@ input[type='date']:hover {
   text-decoration: line-through;
 }
 
+.todo-edit, 
+.todo-remove {
+    border-radius: 10px;
+}
+
 .todo-remove {
   background-color: var(--accent);
   color: var(--back);
